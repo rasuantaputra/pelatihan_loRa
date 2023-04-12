@@ -1,0 +1,168 @@
+[
+    {
+        "id": "8dc5693c240e84bb",
+        "type": "tab",
+        "label": "Flow 6",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "3b4a2c90c501de1d",
+        "type": "mqtt in",
+        "z": "8dc5693c240e84bb",
+        "name": "MQTT Subscribe ",
+        "topic": "v2.0/subs/APP632e853ed496c53047/DEV632e7d7150e9535008",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "a8c767c2fff3d717",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 140,
+        "wires": [
+            [
+                "fce8024087b09553"
+            ]
+        ]
+    },
+    {
+        "id": "88167ad5c6e51bf5",
+        "type": "ui_gauge",
+        "z": "8dc5693c240e84bb",
+        "name": "",
+        "group": "d34056b0bf8c2759",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "gauge",
+        "label": "units",
+        "format": "{{msg.payload.t}}",
+        "min": 0,
+        "max": "50",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 470,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "010ea3bcbd6a62cc",
+        "type": "ui_gauge",
+        "z": "8dc5693c240e84bb",
+        "name": "",
+        "group": "d34056b0bf8c2759",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "gauge",
+        "label": "units",
+        "format": "{{msg.payload.h}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 470,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "4e12aa198f9478f9",
+        "type": "debug",
+        "z": "8dc5693c240e84bb",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 480,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "fce8024087b09553",
+        "type": "function",
+        "z": "8dc5693c240e84bb",
+        "name": "Parsing",
+        "func": "var pesan = msg.payload.type;\nif (pesan === \"uplink\") {\n    var data = JSON.parse(msg.payload.data);\n    msg.payload = data;\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 140,
+        "wires": [
+            [
+                "88167ad5c6e51bf5",
+                "010ea3bcbd6a62cc",
+                "4e12aa198f9478f9"
+            ]
+        ]
+    },
+    {
+        "id": "a8c767c2fff3d717",
+        "type": "mqtt-broker",
+        "name": "IoT Telkom ",
+        "broker": "mqtt.telkomiot.id",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "d34056b0bf8c2759",
+        "type": "ui_group",
+        "name": "EM300MCS-4240",
+        "tab": "7c180910d7e0ba3a",
+        "order": 1,
+        "disp": true,
+        "width": "4",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "7c180910d7e0ba3a",
+        "type": "ui_tab",
+        "name": "EM",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
